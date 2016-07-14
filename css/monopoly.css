@@ -59,6 +59,10 @@ body{
     background-image: url(../images/jail.jpg);
 }
 
+.board .game.cell.in-jailed{
+    background-image: url(../images/jailed.jpg);
+}
+
 
 .board .game.cell.free-parking{
     background-image: url(../images/parking.png);
@@ -214,7 +218,7 @@ body{
     width: 25%;
     height: 25%;
     margin: 4%;
-    background-color: black;
+    background-color: #364c9c;
     border-radius: 100px;
     opacity:0;
 }
