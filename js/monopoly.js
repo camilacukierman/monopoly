@@ -191,9 +191,21 @@ Monopoly.handleChanceCard = function (player) {
 };
 
 Monopoly.handleCommunityCard = function (player) {
-    //TODO: implement this method
-    alert("not implemented yet!");
-    Monopoly.setNextPlayerTurn();
+    var popup = Monopoly.getPopup("community");
+    popup.find(".popup-content").addClass("loading-state");
+    $.get("https://itcmonopoly.appspot.com/get_random_community_card", function (chanceJson) {
+        popup.find(".popup-content #text-placeholder").text(chanceJson["content"]);
+        popup.find(".popup-title").text(chanceJson["title"]);
+        popup.find(".popup-content").removeClass("loading-state");
+        popup.find(".popup-content button").attr("data-action", chanceJson["action"]).attr("data-amount", chanceJson["amount"]);
+    }, "json");
+    popup.find("button").unbind("click").bind("click", function () {
+        var currentBtn = $(this);
+        var action = currentBtn.attr("data-action");
+        var amount = currentBtn.attr("data-amount");
+        Monopoly.handleAction(player, action, amount);
+    });
+    Monopoly.showPopup("community");
 };
 
 
@@ -295,7 +307,7 @@ Monopoly.getNextCell = function (cell) {
     var nextCellId = currentCellId + 1;
     if (nextCellId > 40) {
         Monopoly.handlePassedGo();
-        nextCellId = +10;
+        nextCellId = 1;
     }
     return $(".cell#cell" + nextCellId);
 };
@@ -303,7 +315,7 @@ Monopoly.getNextCell = function (cell) {
 
 Monopoly.handlePassedGo = function () {
     var player = Monopoly.getCurrentPlayer();
-    Monopoly.updatePlayersMoney(player, Monopoly.moneyAtStart / 10);
+    Monopoly.updatePlayersMoney(player, -1* Monopoly.moneyAtStart / 10);
 };
 
 
@@ -314,7 +326,6 @@ Monopoly.isValidInput = function (validate, value) {
             if (value > 1 && value <= 4) {
                 isValid = true;
             }
-
             break;
     }
 
