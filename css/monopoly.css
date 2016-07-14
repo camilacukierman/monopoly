@@ -57,10 +57,12 @@ body{
 
 .board .game.cell.in-jail{
     background-image: url(../images/jail.jpg);
+
 }
 
-.board .game.cell.in-jailed{
-    background-image: url(../images/jailed.jpg);
+.jailed{
+    background-image: url(../images/jailed.png);
+    background-size: contain ;
 }
 
 
@@ -225,4 +227,9 @@ body{
 
 .dice-dot.right{
     margin-left:36%;
+}
+
+.game.cell.player1 #player1, .game.cell.player2 #player2, .game.cell.player3 #player3, .game.cell.player4 #player4{
+    background-image: url(../images/smile.png);
+    background-size:contain ;
 }

@@ -1,6 +1,6 @@
 var Monopoly = {};
 Monopoly.allowRoll = true;
-Monopoly.moneyAtStart = 10;
+Monopoly.moneyAtStart = 35;
 Monopoly.doubleCounter = 0;
 
 Monopoly.init = function(){
@@ -307,6 +307,7 @@ Monopoly.handlePassedGo = function(){
 };
 
 
+
 Monopoly.isValidInput = function(validate,value){
     var isValid = false;
     switch(validate){
@@ -314,9 +315,7 @@ Monopoly.isValidInput = function(validate,value){
             if(value > 1 && value <= 4){
                 isValid = true;
             }
-            //TODO: remove when done
-
-            isValid = true;
+ 
             break;
     }
 
@@ -325,7 +324,7 @@ Monopoly.isValidInput = function(validate,value){
     }
     return isValid;
 
-}
+};
 
 Monopoly.showErrorMsg = function(){
     $(".popup-page .invalid-error").fadeTo(500,1);
